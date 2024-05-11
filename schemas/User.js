@@ -4,22 +4,25 @@ const userSchema = new mongoose.Schema(
   {
     role: {
       type: String,
-      enum: ["admin", "user", "guest"],
+      enum: ["Professional", "guest"],
     },
     name: { type: String, required: true },
+
     email: {
       type: String,
       unique: true,
       required: true,
     },
     password: {
+      minLength: 6,
       type: String,
       required: true,
     },
     picture: String,
-    job: { type: String, required: true },
+    job: { type: String },
+    age: { type: Number, required: true },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);
