@@ -2,7 +2,7 @@ import User from "../schemas/User.js";
 import bcrypt from "bcrypt";
 export const Login = async (req, res) => {
   try {
-    const FoundUser = User.findOne({ email: req.body.email });
+    const FoundUser = await User.findOne({ email: req.body.email });
 
     console.log(FoundUser);
     if (!FoundUser) {
@@ -43,7 +43,7 @@ export const CreateUser = async (req, res) => {
         job: req.body.job,
       };
       User.insertMany(newUser);
-      res.json({ message: "user created" });
+      res.json({ message: "user created", newUser });
     });
   } catch (err) {
     console.log(err);
